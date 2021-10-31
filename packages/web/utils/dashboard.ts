@@ -52,7 +52,7 @@ export const gridConfig = {
         height: '100%',
       },
       h2: {
-        fontFamily: 'exo',
+        fontFamily: 'exo2',
         fontSize: 'lg',
         fontWeight: '700',
         textAlign: 'left',
