@@ -47,7 +47,8 @@
     "react-qr-svg": "2.3.0",
     "react-resizable": "^3.0.4",
     "urql": "2.0.2",
-    "web3modal": "1.9.4"
+    "web3modal": "1.9.4",
+    "sourcecred": "0.9.0"
   },
   "devDependencies": {},
   "resolutions": {}
