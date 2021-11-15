@@ -47,6 +47,7 @@
     "react-is": "16.13.1",
     "react-qr-svg": "2.3.0",
     "react-resizable": "^3.0.4",
+    "rss-to-json": "2.0.2",
     "urql": "2.0.2",
     "web3modal": "1.9.4"
   },
