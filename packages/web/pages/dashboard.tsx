@@ -10,17 +10,15 @@ import {
 } from '@metafam/ds';
 import { PageContainer } from 'components/Container';
 import { Calendar } from 'components/Dashboard/Calendar';
+import { gridConfig, initLayouts } from 'components/Dashboard/config';
 import { GridItem } from 'components/Dashboard/GridItem';
 import { LatestContent } from 'components/Dashboard/LatestContent';
 import { Leaderboard } from 'components/Dashboard/Leaderboard';
 import { Seed } from 'components/Dashboard/Seed';
 import { XP } from 'components/Dashboard/XP';
-import { FC, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { Layout, Layouts, Responsive, WidthProvider } from 'react-grid-layout';
-import { gridConfig, gridData, gridDataMd, gridDataSm } from 'utils/dashboard';
 
-// type LayoutProps = Layout
-// type LayoutsProps = Layouts
 export interface Query {
   [key: string]: ContainerQueries;
 }
@@ -36,16 +34,9 @@ export interface ContainerQueries {
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-export const initLayouts = {
-  lg: gridData,
-  md: gridDataMd,
-  sm: gridDataSm,
-  xs: gridDataSm,
-};
-
 export const originalLayouts = getFromLS('layouts') || initLayouts;
 
-const Dashboard: FC = () => (
+const Dashboard = (): ReactElement => (
   <PageContainer>
     <Grid />
   </PageContainer>
@@ -58,7 +49,7 @@ type CurrentLayoutType = {
   layouts: Layouts;
 };
 
-export const Grid: FC = () => {
+export const Grid = (): ReactElement => {
   const [gridLayouts, setGridLayouts] = useState(
     JSON.parse(JSON.stringify(originalLayouts)),
   );
@@ -82,9 +73,8 @@ export const Grid: FC = () => {
 
   useEffect(() => {
     if (getFromLS('layouts') !== undefined) setOwnLayout(true);
-    function handleLayoutChange(layout: Layout[] = [], layouts: Layouts) {
-      // eslint-disable-next-line no-console
-      console.log(layout);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    function handleLayoutChange(_layout: Layout[] = [], layouts: Layouts) {
       saveToLS('layouts', JSON.parse(JSON.stringify(layouts)));
       setGridLayouts(JSON.parse(JSON.stringify(layouts)));
     }
@@ -135,19 +125,22 @@ export const Grid: FC = () => {
         )}
         <MetaButton
           aria-label="Edit layout"
-          colorScheme="purple"
+          borderColor="transparent"
+          background="rgba(17, 17, 17, 0.9)"
+          _hover={{ color: 'white', borderColor: 'transparent' }}
+          variant="outline"
           textTransform="uppercase"
           px={12}
           letterSpacing="0.1em"
           size="lg"
           fontSize="sm"
           bg="transparent"
-          color={editable ? 'red.400' : 'purple.400'}
+          color={editable ? 'red.400' : 'pinkShadeOne'}
           leftIcon={<EditIcon />}
           transition="color 0.2s ease"
           onClick={toggleEditLayout}
         >
-          Edit layout
+          {editable ? 'Save' : 'Edit'} layout
         </MetaButton>
       </ButtonGroup>
 

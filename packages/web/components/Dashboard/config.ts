@@ -1,15 +1,21 @@
+export const tokenId = 'metagame';
+export const apiUrl = 'https://api.coingecko.com/api/v3/';
+export const tokenQuery = '?localization=false&tickers=true&market_data=true';
+export const chartQuery =
+  '/market_chart?vs_currency=usd&days=30&interval=daily';
+
 export const gridData = [
   { i: 'latest', x: 0, y: 0, w: 6, h: 6 },
-  { i: 'xp', x: 6, y: 0, w: 3, h: 2 },
-  { i: 'seed', x: 9, y: 0, w: 3, h: 2 },
+  { i: 'xp', x: 6, y: 0, w: 3, h: 2, minH: 2 },
+  { i: 'seed', x: 9, y: 0, w: 3, h: 2, minH: 2 },
   { i: 'calendar', x: 6, y: 2, w: 3, h: 4 },
   { i: 'leaderboard', x: 9, y: 2, w: 3, h: 4 },
 ];
 
 export const gridDataMd = [
   { i: 'latest', x: 0, y: 0, w: 6, h: 4 },
-  { i: 'xp', x: 6, y: 0, w: 6, h: 2 },
-  { i: 'seed', x: 6, y: 2, w: 6, h: 2 },
+  { i: 'xp', x: 6, y: 0, w: 6, h: 2, minH: 2 },
+  { i: 'seed', x: 6, y: 2, w: 6, h: 2, minH: 2 },
   { i: 'calendar', x: 0, y: 4, w: 6, h: 4 },
   { i: 'leaderboard', x: 6, y: 4, w: 6, h: 4 },
 ];
@@ -21,6 +27,13 @@ export const gridDataSm = [
   { i: 'calendar', x: 0, y: 5, w: 2, h: 4 },
   { i: 'leaderboard', x: 2, y: 5, w: 2, h: 4 },
 ];
+
+export const initLayouts = {
+  lg: gridData,
+  md: gridDataMd,
+  sm: gridDataSm,
+  xs: gridDataSm,
+};
 
 export const gridConfig = {
   wrapper: (editable: boolean): Record<string, unknown> => ({
@@ -49,6 +62,7 @@ export const gridConfig = {
       },
       '.container': {
         overflowY: 'auto',
+        overflowX: 'hidden',
         height: '100%',
       },
       h2: {
@@ -168,14 +182,21 @@ export const gridConfig = {
         },
         '.chakra-stat': {
           '&__group': {
-            mt: 1,
+            mt: 3,
+            mb: 0,
           },
           '&__label': {
             fontSize: 'xs',
           },
-          '&:last-of-type': {
+          '&__number': {
+            fontSize: 'lg',
+          },
+          '&:nth-of-type(3n)': {
             display: 'none',
           },
+        },
+        '.infoLink': {
+          display: 'none',
         },
       },
       '&__xs': {
@@ -216,6 +237,25 @@ export const gridConfig = {
             fontSize: 'xs',
           },
         },
+      },
+    },
+  },
+};
+
+export const chartWrapperStyles = {
+  '.seed-chart': {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    maxW: '100%',
+    '.seed-chart-path': {
+      bottom: 0,
+      strokeWidth: 2,
+      fillOpacity: 0,
+      '&--fill': {
+        fillOpacity: 0.5,
+        strokeWidth: 0,
       },
     },
   },
