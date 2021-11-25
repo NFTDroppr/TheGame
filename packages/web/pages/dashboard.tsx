@@ -82,13 +82,13 @@ export const Grid: FC = () => {
 
   useEffect(() => {
     if (getFromLS('layouts') !== undefined) setOwnLayout(true);
-    function handleLayoutChange(layout: Layout[] = [], layouts: Layouts) {
+    function handleLayoutChange(layouts: Layouts, layout: Layout[] = []) {
       // eslint-disable-next-line no-console
       console.log(layout);
       saveToLS('layouts', JSON.parse(JSON.stringify(layouts)));
       setGridLayouts(JSON.parse(JSON.stringify(layouts)));
     }
-    if (changed) handleLayoutChange(current.layout, current.layouts);
+    if (changed) handleLayoutChange(current.layouts, current.layout);
   }, [current, changed]);
 
   function handleReset() {
